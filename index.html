@@ -33,6 +33,7 @@
             background-color: #f5f5f5;
             color: var(--text-dark);
             line-height: 1.6;
+            overflow-x: hidden;
         }
         
         /* Header et navigation */
@@ -42,6 +43,7 @@
             background-size: cover;
             background-position: center;
             height: 100vh;
+            min-height: 700px;
             color: var(--text-light);
             display: flex;
             flex-direction: column;
@@ -70,6 +72,29 @@
             100% { background-position: 1000px 0; }
         }
         
+        /* Animation d'apparition des bulles d'eau */
+        .bubble {
+            position: absolute;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: rise 15s infinite ease-in;
+        }
+        
+        @keyframes rise {
+            0% {
+                transform: translateY(0) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1.5);
+                opacity: 0;
+            }
+        }
+        
         .logo {
             position: absolute;
             top: 20px;
@@ -77,11 +102,18 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            z-index: 1000;
         }
         
         .logo i {
             font-size: 2.5rem;
             color: var(--cascade-blue);
+            animation: waterShine 3s infinite;
+        }
+        
+        @keyframes waterShine {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.5); }
         }
         
         .logo h1 {
@@ -89,29 +121,121 @@
             color: white;
         }
         
+        /* Menu responsive */
         nav {
             position: absolute;
             top: 20px;
             right: 20px;
+            z-index: 1000;
         }
         
-        nav ul {
+        .nav-links {
             display: flex;
             list-style: none;
             gap: 20px;
         }
         
-        nav a {
+        .nav-links a {
             color: var(--text-light);
             text-decoration: none;
             font-weight: bold;
             padding: 10px 15px;
             border-radius: 5px;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
+            position: relative;
         }
         
-        nav a:hover {
+        .nav-links a:hover {
             background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--sunset-orange);
+            transition: all 0.3s;
+            transform: translateX(-50%);
+        }
+        
+        .nav-links a:hover:after {
+            width: 80%;
+        }
+        
+        /* Menu hamburger pour mobile */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            z-index: 1001;
+        }
+        
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 250px;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            padding: 80px 20px 20px;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            z-index: 999;
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        .mobile-menu ul {
+            list-style: none;
+        }
+        
+        .mobile-menu a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        
+        .mobile-menu a:hover {
+            color: var(--sunset-orange);
+        }
+        
+        .close-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+        
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 998;
+        }
+        
+        .overlay.active {
+            display: block;
         }
         
         .hero-content {
@@ -123,12 +247,45 @@
             font-size: 3.5rem;
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeInDown 1s ease;
         }
         
         .hero-content p {
             font-size: 1.2rem;
             margin-bottom: 30px;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+        
+        .cta-buttons {
+            animation: fadeIn 1s ease 0.6s both;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         
         .cta-button {
@@ -140,18 +297,68 @@
             text-decoration: none;
             font-weight: bold;
             font-size: 1.2rem;
-            transition: transform 0.3s, background-color 0.3s;
+            transition: all 0.3s;
             margin: 10px;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
         }
         
         .cta-button:hover {
             background-color: #ff6b35;
             transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cta-button:hover:after {
+            animation: ripple 1s ease-out;
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(40, 40);
+                opacity: 0;
+            }
+        }
+        
+        .cta-button.secondary {
+            background-color: var(--jungle-green);
+        }
+        
+        .cta-button.secondary:hover {
+            background-color: #2a7a4a;
         }
         
         /* Sections générales */
         section {
             padding: 80px 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .section-title {
@@ -170,6 +377,12 @@
             background-color: var(--sunset-orange);
             margin: 15px auto;
             border-radius: 2px;
+            animation: expand 1s ease;
+        }
+        
+        @keyframes expand {
+            from { width: 0; }
+            to { width: 100px; }
         }
         
         /* Section À propos */
@@ -210,17 +423,41 @@
             padding: 20px;
             border-radius: 10px;
             text-align: center;
-            transition: transform 0.3s;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--cascade-blue), var(--jungle-green));
+            transform: translateX(-100%);
+            transition: transform 0.5s;
         }
         
         .feature:hover {
             transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature:hover:before {
+            transform: translateX(0);
         }
         
         .feature i {
             font-size: 2.5rem;
             color: var(--cascade-blue);
             margin-bottom: 15px;
+            transition: transform 0.5s;
+        }
+        
+        .feature:hover i {
+            transform: scale(1.2);
         }
         
         /* Section Galerie */
@@ -242,17 +479,34 @@
             overflow: hidden;
             position: relative;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
         }
         
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s;
+            transition: all 0.5s;
         }
         
         .gallery-item:hover img {
             transform: scale(1.1);
+        }
+        
+        .gallery-item:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.7));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .gallery-item:hover:after {
+            opacity: 1;
         }
         
         /* Section Réservation */
@@ -273,6 +527,18 @@
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--sunset-orange), var(--jungle-green));
         }
         
         .price-item {
@@ -280,6 +546,11 @@
             justify-content: space-between;
             padding: 15px 0;
             border-bottom: 1px dashed #ccc;
+            transition: transform 0.3s;
+        }
+        
+        .price-item:hover {
+            transform: translateX(10px);
         }
         
         .price-item:last-child {
@@ -301,10 +572,23 @@
             background-color: #f9f9f9;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .reservation-form:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--jungle-green), var(--cascade-blue));
         }
         
         .form-group {
             margin-bottom: 20px;
+            position: relative;
         }
         
         .form-group label {
@@ -322,6 +606,7 @@
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 1rem;
+            transition: all 0.3s;
         }
         
         .form-group input:focus,
@@ -329,6 +614,7 @@
         .form-group textarea:focus {
             outline: none;
             border-color: var(--cascade-blue);
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
         }
         
         .group-types {
@@ -347,15 +633,26 @@
             transition: all 0.3s;
         }
         
+        .group-type:hover {
+            border-color: var(--cascade-blue);
+            transform: translateY(-5px);
+        }
+        
         .group-type.active {
             border-color: var(--cascade-blue);
             background-color: var(--water-light);
+            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.2);
         }
         
         .group-type i {
             font-size: 2rem;
             color: var(--cascade-blue);
             margin-bottom: 10px;
+            transition: transform 0.3s;
+        }
+        
+        .group-type.active i {
+            transform: scale(1.2);
         }
         
         .submit-btn {
@@ -368,11 +665,63 @@
             font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
         }
         
         .submit-btn:hover {
             background-color: #ff6b35;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 127, 80, 0.3);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+        
+        .submit-btn.loading {
+            pointer-events: none;
+            opacity: 0.8;
+        }
+        
+        .submit-btn.loading:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .form-message {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .form-message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+        
+        .form-message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
         }
         
         /* Section Contact */
@@ -396,6 +745,11 @@
             display: flex;
             align-items: center;
             margin-bottom: 25px;
+            transition: transform 0.3s;
+        }
+        
+        .contact-item:hover {
+            transform: translateX(10px);
         }
         
         .contact-item i {
@@ -403,6 +757,7 @@
             color: var(--cascade-blue);
             margin-right: 15px;
             width: 40px;
+            text-align: center;
         }
         
         .map-container {
@@ -410,6 +765,11 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .map-container:hover {
+            transform: scale(1.02);
         }
         
         /* Footer */
@@ -439,10 +799,12 @@
             margin-bottom: 10px;
             display: block;
             text-decoration: none;
+            transition: color 0.3s;
         }
         
         .footer-column a:hover {
             color: white;
+            text-decoration: underline;
         }
         
         .social-icons {
@@ -459,11 +821,12 @@
             height: 40px;
             background-color: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
         }
         
         .social-icons a:hover {
             background-color: var(--sunset-orange);
+            transform: translateY(-5px);
         }
         
         .copyright {
@@ -474,22 +837,144 @@
             font-size: 0.9rem;
         }
         
-        /* Responsive */
+        .copyright a {
+            color: var(--leaf-green);
+            text-decoration: none;
+        }
+        
+        .copyright a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Modal de confirmation */
+        .confirmation-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .confirmation-modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            animation: modalFadeIn 0.3s ease;
+        }
+        
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .modal-content h3 {
+            color: var(--jungle-green);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .modal-content p {
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .modal-content .whatsapp-btn {
+            background-color: #25D366;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+        
+        .modal-content .whatsapp-btn:hover {
+            background-color: #128C7E;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+        }
+        
+        .modal-content .close-modal {
+            background-color: #f8f9fa;
+            color: var(--text-dark);
+            border: 1px solid #ddd;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        
+        .modal-content .close-modal:hover {
+            background-color: #e9ecef;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+        }
+        
         @media (max-width: 768px) {
             .hero-content h1 {
                 font-size: 2.5rem;
             }
             
-            nav {
-                position: relative;
-                top: 0;
-                right: 0;
-                margin-top: 20px;
+            .hero-content p {
+                font-size: 1.1rem;
             }
             
-            nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hamburger {
+                display: block;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+            }
+            
+            .mobile-menu {
+                display: block;
             }
             
             .features {
@@ -499,6 +984,57 @@
             .group-types {
                 grid-template-columns: 1fr;
             }
+            
+            .about-content,
+            .reservation-container,
+            .contact-container,
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            section {
+                padding: 60px 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .cta-button {
+                padding: 12px 25px;
+                font-size: 1rem;
+                margin: 5px;
+                display: block;
+                width: 100%;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .gallery-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                padding: 30px 20px;
+            }
+        }
+        
+        /* Animation des bulles d'eau */
+        @keyframes createBubbles {
+            0% { opacity: 0; }
+            20% { opacity: 1; }
+            100% {
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
         }
     </style>
 </head>
@@ -507,12 +1043,13 @@
     <header>
         <div class="water-animation"></div>
         <div class="logo">
-            <i class="fas fa-water"></i>
+            <i class="fas fa-home"></i>
             <h1>Cascades de Banfora</h1>
         </div>
         
-        <nav>
-            <ul>
+        <!-- Menu desktop -->
+        <nav class="desktop-nav">
+            <ul class="nav-links">
                 <li><a href="#about">À propos</a></li>
                 <li><a href="#gallery">Galerie</a></li>
                 <li><a href="#reservation">Réservation</a></li>
@@ -520,11 +1057,32 @@
             </ul>
         </nav>
         
+        <!-- Menu mobile -->
+        <button class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        <div class="overlay" id="overlay"></div>
+        
+        <div class="mobile-menu" id="mobileMenu">
+            <button class="close-menu" id="closeMenu">
+                <i class="fas fa-times"></i>
+            </button>
+            <ul>
+                <li><a href="#about" class="mobile-link">À propos</a></li>
+                <li><a href="#gallery" class="mobile-link">Galerie</a></li>
+                <li><a href="#reservation" class="mobile-link">Réservation</a></li>
+                <li><a href="#contact" class="mobile-link">Contact</a></li>
+            </ul>
+        </div>
+        
         <div class="hero-content">
             <h1>Cascades de Banfora</h1>
             <p>Découvrez la Côte d'Azur du Burkina Faso, un joyau naturel aux eaux limpides et aux paysages à couper le souffle</p>
-            <a href="#reservation" class="cta-button">Réserver une visite</a>
-            <a href="#about" class="cta-button" style="background-color: var(--jungle-green);">Découvrir</a>
+            <div class="cta-buttons">
+                <a href="#reservation" class="cta-button">Réserver une visite</a>
+                <a href="#about" class="cta-button secondary">Découvrir</a>
+            </div>
         </div>
     </header>
     
@@ -611,6 +1169,7 @@
             
             <div class="reservation-form">
                 <h3>Formulaire de réservation pour groupes</h3>
+                <div id="formMessage" class="form-message"></div>
                 <form id="bookingForm">
                     <div class="form-group">
                         <label for="groupType">Type de groupe</label>
@@ -670,7 +1229,9 @@
                         <textarea id="specialRequests" name="specialRequests" rows="4" placeholder="Visite guidée, pique-nique sur place, etc."></textarea>
                     </div>
                     
-                    <button type="submit" class="submit-btn">Envoyer la demande de réservation</button>
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <span>Envoyer la demande de réservation</span>
+                    </button>
                 </form>
             </div>
         </div>
@@ -741,7 +1302,7 @@
                 <h3>Informations pratiques</h3>
                 <p><i class="far fa-clock"></i> Ouvert tous les jours: 8h - 18h</p>
                 <p><i class="fas fa-ban"></i> Nuitée interdite sur le site</p>
-                <p><i class="fas fa-ticket-alt"></i> Tarifs: 500-1000 FCFA</p>
+                <p><i class="fas fa-ticket-alt"></i> Tarifs: 200-500 FCFA</p>
                 <p><i class="fas fa-map-marker-alt"></i> Karfiguéla, Banfora, Burkina Faso</p>
             </div>
         </div>
@@ -752,7 +1313,32 @@
         </div>
     </footer>
     
+    <!-- Modal de confirmation -->
+    <div class="confirmation-modal" id="confirmationModal">
+        <div class="modal-content">
+            <h3>Demande de réservation envoyée !</h3>
+            <p>Votre demande a été préparée pour envoi via WhatsApp. Cliquez sur le bouton ci-dessous pour l'envoyer directement au service de réservation.</p>
+            <button class="whatsapp-btn" id="whatsappBtn">
+                <i class="fab fa-whatsapp"></i>
+                Envoyer via WhatsApp
+            </button>
+            <button class="close-modal" id="closeModal">Fermer</button>
+        </div>
+    </div>
+
     <script>
+        // Données pour la génération du message WhatsApp
+        let reservationData = null;
+        const whatsappNumber = "+22602717155";
+        
+        // Types de groupe en français
+        const groupTypeNames = {
+            'school': 'Établissement scolaire',
+            'training': 'Centre de formation',
+            'friends': "Groupe d'amis",
+            'family': 'Famille'
+        };
+        
         // Animation pour la sélection du type de groupe
         document.querySelectorAll('.group-type').forEach(item => {
             item.addEventListener('click', event => {
@@ -773,31 +1359,164 @@
         document.getElementById('bookingForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
+            const submitBtn = document.getElementById('submitBtn');
+            const formMessage = document.getElementById('formMessage');
+            
             // Récupération des données du formulaire
             const groupType = document.getElementById('groupType').value;
-            const groupName = document.getElementById('groupName').value;
+            const groupName = document.getElementById('groupName').value.trim();
             const participants = document.getElementById('participants').value;
             const visitDate = document.getElementById('visitDate').value;
-            const contactName = document.getElementById('contactName').value;
-            const contactEmail = document.getElementById('contactEmail').value;
-            const contactPhone = document.getElementById('contactPhone').value;
+            const contactName = document.getElementById('contactName').value.trim();
+            const contactEmail = document.getElementById('contactEmail').value.trim();
+            const contactPhone = document.getElementById('contactPhone').value.trim();
+            const specialRequests = document.getElementById('specialRequests').value.trim();
             
-            // Types de groupe en français
-            const groupTypeNames = {
-                'school': 'Établissement scolaire',
-                'training': 'Centre de formation',
-                'friends': 'Groupe d\'amis',
-                'family': 'Famille'
+            // Validation des champs
+            if (!groupName || !participants || !visitDate || !contactName || !contactEmail || !contactPhone) {
+                showMessage('Veuillez remplir tous les champs obligatoires.', 'error');
+                return;
+            }
+            
+            if (participants < 3 || participants > 500) {
+                showMessage('Le nombre de participants doit être entre 3 et 500.', 'error');
+                return;
+            }
+            
+            // Formatage de la date
+            const formattedDate = new Date(visitDate).toLocaleDateString('fr-FR', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            
+            // Stocker les données pour WhatsApp
+            reservationData = {
+                groupType: groupTypeNames[groupType],
+                groupName: groupName,
+                participants: participants,
+                visitDate: formattedDate,
+                contactName: contactName,
+                contactEmail: contactEmail,
+                contactPhone: contactPhone,
+                specialRequests: specialRequests || 'Aucune'
             };
             
-            // Affichage d'une alerte de confirmation (à remplacer par un envoi réel en production)
-            alert(`Merci ${contactName} ! Votre demande de réservation pour le groupe "${groupName}" (${groupTypeNames[groupType]}) a été envoyée avec succès.\n\nNous vous contacterons à ${contactEmail} ou au ${contactPhone} pour confirmer votre visite prévue le ${visitDate} avec ${participants} participants.\n\nCette fonctionnalité est en démonstration. En production, les données seraient envoyées à un serveur.`);
+            // Afficher le bouton de chargement
+            submitBtn.classList.add('loading');
             
-            // Réinitialisation du formulaire
-            document.getElementById('bookingForm').reset();
-            document.querySelectorAll('.group-type').forEach(el => el.classList.remove('active'));
-            document.querySelector('.group-type[data-value="school"]').classList.add('active');
-            document.getElementById('groupType').value = 'school';
+            // Simuler un délai d'envoi
+            setTimeout(() => {
+                // Afficher le modal de confirmation
+                document.getElementById('confirmationModal').classList.add('active');
+                
+                // Réinitialiser le formulaire
+                document.getElementById('bookingForm').reset();
+                document.querySelectorAll('.group-type').forEach(el => el.classList.remove('active'));
+                document.querySelector('.group-type[data-value="school"]').classList.add('active');
+                document.getElementById('groupType').value = 'school';
+                
+                // Retirer le bouton de chargement
+                submitBtn.classList.remove('loading');
+            }, 1500);
+        });
+        
+        // Fonction pour afficher les messages
+        function showMessage(message, type) {
+            const formMessage = document.getElementById('formMessage');
+            formMessage.textContent = message;
+            formMessage.className = `form-message ${type}`;
+            
+            // Masquer le message après 5 secondes
+            setTimeout(() => {
+                formMessage.className = 'form-message';
+            }, 5000);
+        }
+        
+        // Gestion du bouton WhatsApp
+        document.getElementById('whatsappBtn').addEventListener('click', function() {
+            if (!reservationData) return;
+            
+            // Création du message structuré
+            const message = `*NOUVELLE DEMANDE DE RÉSERVATION - CASCADES DE BANFORA*
+
+*Type de groupe:* ${reservationData.groupType}
+*Nom du groupe/organisation:* ${reservationData.groupName}
+*Nombre de participants:* ${reservationData.participants}
+*Date de visite souhaitée:* ${reservationData.visitDate}
+
+*INFORMATIONS DE CONTACT:*
+*Nom du responsable:* ${reservationData.contactName}
+*Email:* ${reservationData.contactEmail}
+*Téléphone:* ${reservationData.contactPhone}
+
+*DEMANDES SPÉCIALES:*
+${reservationData.specialRequests}
+
+---
+Cette demande a été envoyée via le site web des Cascades de Banfora.`;
+            
+            // Encodage du message pour URL
+            const encodedMessage = encodeURIComponent(message);
+            
+            // Création du lien WhatsApp
+            const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+            
+            // Ouvrir WhatsApp dans un nouvel onglet
+            window.open(whatsappLink, '_blank');
+            
+            // Fermer le modal
+            document.getElementById('confirmationModal').classList.remove('active');
+            
+            // Afficher un message de confirmation
+            showMessage('WhatsApp ouvert avec votre message de réservation. Veuillez l\'envoyer pour finaliser votre demande.', 'success');
+        });
+        
+        // Fermeture du modal
+        document.getElementById('closeModal').addEventListener('click', function() {
+            document.getElementById('confirmationModal').classList.remove('active');
+        });
+        
+        // Fermer le modal en cliquant à l'extérieur
+        document.getElementById('confirmationModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('active');
+            }
+        });
+        
+        // Menu mobile
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const closeMenu = document.getElementById('closeMenu');
+        const overlay = document.getElementById('overlay');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        
+        hamburger.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeMenu.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        
+        overlay.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        
+        // Fermer le menu mobile après avoir cliqué sur un lien
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
         });
         
         // Définir la date minimum pour la réservation (demain)
@@ -815,18 +1534,95 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.classList.add('visible');
                 }
             });
         }, observerOptions);
         
         // Appliquer l'animation aux sections
         document.querySelectorAll('section').forEach(section => {
-            section.style.opacity = '0';
-            section.style.transform = 'translateY(20px)';
-            section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
             observer.observe(section);
+        });
+        
+        // Animation des bulles d'eau
+        function createBubbles() {
+            const header = document.querySelector('header');
+            const bubbleCount = 15;
+            
+            for (let i = 0; i < bubbleCount; i++) {
+                setTimeout(() => {
+                    const bubble = document.createElement('div');
+                    bubble.classList.add('bubble');
+                    
+                    // Taille aléatoire
+                    const size = Math.random() * 60 + 20;
+                    bubble.style.width = `${size}px`;
+                    bubble.style.height = `${size}px`;
+                    
+                    // Position aléatoire
+                    bubble.style.left = `${Math.random() * 100}%`;
+                    
+                    // Délai d'animation aléatoire
+                    const delay = Math.random() * 5;
+                    bubble.style.animationDelay = `${delay}s`;
+                    
+                    // Durée d'animation aléatoire
+                    const duration = Math.random() * 10 + 10;
+                    bubble.style.animationDuration = `${duration}s`;
+                    
+                    header.appendChild(bubble);
+                    
+                    // Supprimer la bulle après l'animation
+                    setTimeout(() => {
+                        bubble.remove();
+                    }, (duration + delay) * 1000);
+                }, i * 300);
+            }
+        }
+        
+        // Créer des bulles initiales
+        createBubbles();
+        
+        // Créer des bulles toutes les 20 secondes
+        setInterval(createBubbles, 20000);
+        
+        // Animation du logo
+        const logoIcon = document.querySelector('.logo i');
+        setInterval(() => {
+            logoIcon.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                logoIcon.style.transform = 'scale(1)';
+            }, 300);
+        }, 3000);
+        
+        // Navigation fluide
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Effet de parallaxe sur le header
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const header = document.querySelector('header');
+            const waterAnimation = document.querySelector('.water-animation');
+            
+            if (header && waterAnimation) {
+                header.style.transform = `translateY(${scrolled * 0.5}px)`;
+                waterAnimation.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
         });
     </script>
 </body>
