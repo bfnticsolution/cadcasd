@@ -3,10 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cascades de Banfora - La Côte d'Azur du Burkina Faso</title>
+    <title>Cascades de Banfora - La Côte d'Azur du Burkina Faso | Site Officiel</title>
+    <meta name="description" content="Découvrez les magnifiques Cascades de Banfora (Karfiguéla), joyau naturel du Burkina Faso. Réservez votre visite, explorez les chutes d'eau et vivez une expérience inoubliable.">
+    <meta name="keywords" content="Cascades Banfora, Karfiguéla, tourisme Burkina Faso, chutes d'eau, nature, visite guidée, réservation groupe, Banfora tourisme">
+    <meta name="author" content="Cascades de Banfora - NTIC SOLUTION">
+    <meta property="og:title" content="Cascades de Banfora - La Côte d'Azur du Burkina Faso">
+    <meta property="og:description" content="Découvrez l'un des sites touristiques les plus importants du Burkina Faso">
+    <meta property="og:image" content="https://www.infosculturedufaso.net/wp-content/uploads/2025/05/FB_IMG_1746896613718.jpg">
+    <meta property="og:url" content="https://cascades.tannounyan.online">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Variables de couleurs inspirées de l'écosystème */
+        /* Variables globales */
         :root {
             --cascade-blue: #4a90e2;
             --jungle-green: #2e8b57;
@@ -14,34 +25,118 @@
             --sunset-orange: #ff7f50;
             --leaf-green: #7cfc00;
             --water-light: #e0f7fa;
-            --text-dark: #333;
-            --text-light: #fff;
+            --text-dark: #1a1a1a;
+            --text-light: #ffffff;
+            --gradient-primary: linear-gradient(135deg, var(--cascade-blue) 0%, var(--jungle-green) 100%);
+            --gradient-hero: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.6) 100%);
+            --shadow-soft: 0 10px 30px rgba(0,0,0,0.08);
+            --shadow-medium: 0 15px 40px rgba(0,0,0,0.12);
+            --shadow-hard: 0 20px 60px rgba(0,0,0,0.15);
+            --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius: 12px;
         }
         
+        /* Reset et styles de base */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         html {
             scroll-behavior: smooth;
+            font-size: 16px;
         }
         
         body {
-            background-color: #f5f5f5;
+            font-family: 'Poppins', sans-serif;
+            background: #f5f5f5;
             color: var(--text-dark);
             line-height: 1.6;
             overflow-x: hidden;
+            opacity: 0;
+            animation: fadeInBody 1s ease forwards;
+        }
+        
+        @keyframes fadeInBody {
+            to { opacity: 1; }
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+        
+        /* Préloader */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        .loader {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .loader-inner {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 4px solid transparent;
+            border-top-color: white;
+            animation: spin 1s linear infinite;
+        }
+        
+        .loader-inner:nth-child(2) {
+            border-top-color: var(--sunset-orange);
+            animation: spin 1.5s linear infinite reverse;
+        }
+        
+        .loader-inner:nth-child(3) {
+            border-top-color: var(--leaf-green);
+            animation: spin 2s linear infinite;
+            width: 70%;
+            height: 70%;
+            top: 15%;
+            left: 15%;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 500;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
         }
         
         /* Header et navigation */
         header {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), 
-                        url('https://www.infosculturedufaso.net/wp-content/uploads/2025/05/FB_IMG_1746896613718.jpg');
+            background: var(--gradient-hero), url('https://www.infosculturedufaso.net/wp-content/uploads/2025/05/FB_IMG_1746896613718.jpg');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
             height: 100vh;
             min-height: 700px;
             color: var(--text-light);
@@ -50,11 +145,13 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 0 20px;
+            padding: 0 5%;
             position: relative;
             overflow: hidden;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
         }
         
+        /* Animation d'eau */
         .water-animation {
             position: absolute;
             bottom: 0;
@@ -65,6 +162,7 @@
             background-size: cover;
             opacity: 0.6;
             animation: waterFlow 20s linear infinite;
+            z-index: 1;
         }
         
         @keyframes waterFlow {
@@ -72,13 +170,14 @@
             100% { background-position: 1000px 0; }
         }
         
-        /* Animation d'apparition des bulles d'eau */
+        /* Bulles d'eau */
         .bubble {
             position: absolute;
             bottom: 0;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             animation: rise 15s infinite ease-in;
+            pointer-events: none;
         }
         
         @keyframes rise {
@@ -95,37 +194,47 @@
             }
         }
         
+        /* Logo */
         .logo {
             position: absolute;
-            top: 20px;
-            left: 20px;
+            top: 25px;
+            left: 25px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             z-index: 1000;
         }
         
         .logo i {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             color: var(--cascade-blue);
             animation: waterShine 3s infinite;
+            filter: drop-shadow(0 0 8px rgba(74, 144, 226, 0.5));
         }
         
         @keyframes waterShine {
-            0%, 100% { filter: brightness(1); }
-            50% { filter: brightness(1.5); }
+            0%, 100% { 
+                filter: drop-shadow(0 0 5px rgba(74, 144, 226, 0.5));
+                transform: scale(1);
+            }
+            50% { 
+                filter: drop-shadow(0 0 20px rgba(74, 144, 226, 0.8));
+                transform: scale(1.1);
+            }
         }
         
         .logo h1 {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: white;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
         
-        /* Menu responsive */
-        nav {
+        /* Navigation desktop */
+        .desktop-nav {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 25px;
+            right: 25px;
             z-index: 1000;
         }
         
@@ -138,15 +247,17 @@
         .nav-links a {
             color: var(--text-light);
             text-decoration: none;
-            font-weight: bold;
-            padding: 10px 15px;
-            border-radius: 5px;
-            transition: all 0.3s;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: var(--transition-smooth);
             position: relative;
+            font-size: 1.05rem;
         }
         
         .nav-links a:hover {
-            background-color: rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
         }
         
         .nav-links a:after {
@@ -162,18 +273,30 @@
         }
         
         .nav-links a:hover:after {
-            width: 80%;
+            width: 70%;
         }
         
-        /* Menu hamburger pour mobile */
+        /* Menu hamburger mobile */
         .hamburger {
             display: none;
-            cursor: pointer;
-            background: none;
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: rgba(255, 255, 255, 0.1);
             border: none;
             color: white;
             font-size: 1.8rem;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
             z-index: 1001;
+            backdrop-filter: blur(10px);
+            transition: var(--transition-smooth);
+        }
+        
+        .hamburger:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
         }
         
         .mobile-menu {
@@ -181,17 +304,42 @@
             position: fixed;
             top: 0;
             right: 0;
-            width: 250px;
+            width: 300px;
             height: 100vh;
             background: rgba(0, 0, 0, 0.95);
-            padding: 80px 20px 20px;
+            padding: 80px 30px 30px;
             transform: translateX(100%);
-            transition: transform 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 999;
+            backdrop-filter: blur(10px);
         }
         
         .mobile-menu.active {
             transform: translateX(0);
+        }
+        
+        .close-menu {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-smooth);
+        }
+        
+        .close-menu:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(90deg);
         }
         
         .mobile-menu ul {
@@ -205,22 +353,29 @@
             padding: 15px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             font-size: 1.2rem;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            position: relative;
         }
         
         .mobile-menu a:hover {
             color: var(--sunset-orange);
+            padding-left: 10px;
         }
         
-        .close-menu {
+        .mobile-menu a:after {
+            content: '';
             position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.8rem;
-            cursor: pointer;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 0;
+            background: var(--sunset-orange);
+            transition: height 0.3s ease;
+        }
+        
+        .mobile-menu a:hover:after {
+            height: 20px;
         }
         
         .overlay {
@@ -232,39 +387,48 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.7);
             z-index: 998;
+            backdrop-filter: blur(3px);
         }
         
         .overlay.active {
             display: block;
         }
         
+        /* Contenu hero */
         .hero-content {
-            max-width: 800px;
-            z-index: 1;
+            max-width: 850px;
+            z-index: 2;
+            position: relative;
         }
         
         .hero-content h1 {
-            font-size: 3.5rem;
+            font-size: 3.8rem;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
             animation: fadeInDown 1s ease;
+            line-height: 1.2;
         }
         
         .hero-content p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
+            font-size: 1.3rem;
+            margin-bottom: 40px;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
             animation: fadeInUp 1s ease 0.3s both;
+            opacity: 0.9;
         }
         
         .cta-buttons {
             animation: fadeIn 1s ease 0.6s both;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
         }
         
         @keyframes fadeInDown {
             from {
                 opacity: 0;
-                transform: translateY(-30px);
+                transform: translateY(-40px);
             }
             to {
                 opacity: 1;
@@ -275,7 +439,7 @@
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(40px);
             }
             to {
                 opacity: 1;
@@ -289,20 +453,22 @@
         }
         
         .cta-button {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
             background-color: var(--sunset-orange);
             color: white;
-            padding: 15px 40px;
-            border-radius: 30px;
+            padding: 16px 45px;
+            border-radius: 50px;
             text-decoration: none;
-            font-weight: bold;
-            font-size: 1.2rem;
-            transition: all 0.3s;
-            margin: 10px;
+            font-weight: 600;
+            font-size: 1.15rem;
+            transition: var(--transition-smooth);
             border: none;
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 8px 25px rgba(255, 127, 80, 0.3);
         }
         
         .cta-button:after {
@@ -322,7 +488,7 @@
         .cta-button:hover {
             background-color: #ff6b35;
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 15px 35px rgba(255, 127, 80, 0.4);
         }
         
         .cta-button:hover:after {
@@ -342,15 +508,17 @@
         
         .cta-button.secondary {
             background-color: var(--jungle-green);
+            box-shadow: 0 8px 25px rgba(46, 139, 87, 0.3);
         }
         
         .cta-button.secondary:hover {
             background-color: #2a7a4a;
+            box-shadow: 0 15px 35px rgba(46, 139, 87, 0.4);
         }
         
         /* Sections générales */
         section {
-            padding: 80px 20px;
+            padding: 100px 5%;
             opacity: 0;
             transform: translateY(30px);
             transition: all 0.8s ease;
@@ -363,26 +531,27 @@
         
         .section-title {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 70px;
             color: var(--jungle-green);
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             position: relative;
+            font-weight: 700;
         }
         
         .section-title:after {
             content: '';
             display: block;
-            width: 100px;
+            width: 120px;
             height: 4px;
-            background-color: var(--sunset-orange);
-            margin: 15px auto;
+            background: var(--gradient-primary);
+            margin: 20px auto;
             border-radius: 2px;
             animation: expand 1s ease;
         }
         
         @keyframes expand {
             from { width: 0; }
-            to { width: 100px; }
+            to { width: 120px; }
         }
         
         /* Section À propos */
@@ -394,8 +563,9 @@
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 60px;
+            align-items: center;
         }
         
         .about-text {
@@ -404,28 +574,33 @@
         
         .about-text h3 {
             color: var(--rock-brown);
-            margin-bottom: 15px;
-            font-size: 1.8rem;
+            margin-bottom: 25px;
+            font-size: 2.2rem;
+            font-weight: 600;
         }
         
         .about-text p {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
         }
         
         .features {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+            gap: 25px;
         }
         
         .feature {
             background-color: var(--water-light);
-            padding: 20px;
-            border-radius: 10px;
+            padding: 30px 25px;
+            border-radius: var(--border-radius);
             text-align: center;
-            transition: all 0.3s;
+            transition: var(--transition-smooth);
             position: relative;
             overflow: hidden;
+            border: 1px solid rgba(74, 144, 226, 0.1);
         }
         
         .feature:before {
@@ -435,14 +610,14 @@
             left: 0;
             width: 100%;
             height: 5px;
-            background: linear-gradient(to right, var(--cascade-blue), var(--jungle-green));
+            background: var(--gradient-primary);
             transform: translateX(-100%);
             transition: transform 0.5s;
         }
         
         .feature:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-hard);
         }
         
         .feature:hover:before {
@@ -450,14 +625,20 @@
         }
         
         .feature i {
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: var(--cascade-blue);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             transition: transform 0.5s;
         }
         
         .feature:hover i {
-            transform: scale(1.2);
+            transform: scale(1.2) rotate(5deg);
+        }
+        
+        .feature h3 {
+            color: var(--jungle-green);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
         }
         
         /* Section Galerie */
@@ -466,31 +647,37 @@
         }
         
         .gallery-container {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
         }
         
         .gallery-item {
-            height: 250px;
-            border-radius: 10px;
+            height: 280px;
+            border-radius: var(--border-radius);
             overflow: hidden;
             position: relative;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-soft);
             cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hard);
         }
         
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: all 0.5s;
+            transition: all 0.6s ease;
         }
         
         .gallery-item:hover img {
-            transform: scale(1.1);
+            transform: scale(1.15);
         }
         
         .gallery-item:after {
@@ -500,13 +687,29 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.7));
+            background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8));
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: opacity 0.4s;
         }
         
         .gallery-item:hover:after {
             opacity: 1;
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 25px;
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.4s;
+            z-index: 2;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
         }
         
         /* Section Réservation */
@@ -515,18 +718,18 @@
         }
         
         .reservation-container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 60px;
         }
         
         .pricing {
             background-color: var(--water-light);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 40px 35px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-soft);
             position: relative;
             overflow: hidden;
         }
@@ -537,20 +740,28 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 5px;
+            height: 6px;
             background: linear-gradient(to right, var(--sunset-orange), var(--jungle-green));
+        }
+        
+        .pricing h3 {
+            color: var(--jungle-green);
+            margin-bottom: 30px;
+            font-size: 1.8rem;
         }
         
         .price-item {
             display: flex;
             justify-content: space-between;
-            padding: 15px 0;
+            padding: 18px 0;
             border-bottom: 1px dashed #ccc;
             transition: transform 0.3s;
+            align-items: center;
         }
         
         .price-item:hover {
             transform: translateX(10px);
+            border-bottom-color: var(--cascade-blue);
         }
         
         .price-item:last-child {
@@ -558,20 +769,22 @@
         }
         
         .price-item .category {
-            font-weight: bold;
+            font-weight: 600;
             color: var(--jungle-green);
+            font-size: 1.1rem;
         }
         
         .price-item .price {
-            font-weight: bold;
+            font-weight: 700;
             color: var(--sunset-orange);
+            font-size: 1.3rem;
         }
         
         .reservation-form {
-            padding: 30px;
+            padding: 40px 35px;
             background-color: #f9f9f9;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-soft);
             position: relative;
             overflow: hidden;
         }
@@ -582,31 +795,40 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 5px;
+            height: 6px;
             background: linear-gradient(to right, var(--jungle-green), var(--cascade-blue));
         }
         
+        .reservation-form h3 {
+            color: var(--jungle-green);
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+        }
+        
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             position: relative;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
+            margin-bottom: 10px;
+            font-weight: 600;
             color: var(--rock-brown);
+            font-size: 1.05rem;
         }
         
         .form-group input,
         .form-group select,
         .form-group textarea {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            padding: 15px 18px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
             font-size: 1rem;
-            transition: all 0.3s;
+            transition: var(--transition-smooth);
+            background: white;
+            font-family: 'Poppins', sans-serif;
         }
         
         .form-group input:focus,
@@ -614,7 +836,8 @@
         .form-group textarea:focus {
             outline: none;
             border-color: var(--cascade-blue);
-            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+            box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.15);
+            transform: translateY(-2px);
         }
         
         .group-types {
@@ -625,29 +848,33 @@
         
         .group-type {
             background-color: white;
-            padding: 15px;
-            border-radius: 5px;
+            padding: 20px 15px;
+            border-radius: 10px;
             text-align: center;
             cursor: pointer;
-            border: 2px solid #ddd;
-            transition: all 0.3s;
+            border: 2px solid #e1e5e9;
+            transition: var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
         }
         
         .group-type:hover {
             border-color: var(--cascade-blue);
             transform: translateY(-5px);
+            box-shadow: var(--shadow-soft);
         }
         
         .group-type.active {
             border-color: var(--cascade-blue);
             background-color: var(--water-light);
-            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.2);
+            box-shadow: 0 8px 25px rgba(74, 144, 226, 0.15);
         }
         
         .group-type i {
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: var(--cascade-blue);
-            margin-bottom: 10px;
             transition: transform 0.3s;
         }
         
@@ -655,25 +882,30 @@
             transform: scale(1.2);
         }
         
+        .group-type p {
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+        
         .submit-btn {
-            background-color: var(--sunset-orange);
+            background: var(--gradient-primary);
             color: white;
             border: none;
-            padding: 15px 30px;
+            padding: 18px 30px;
             width: 100%;
-            border-radius: 5px;
-            font-size: 1.1rem;
-            font-weight: bold;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: var(--transition-smooth);
             position: relative;
             overflow: hidden;
+            margin-top: 10px;
         }
         
         .submit-btn:hover {
-            background-color: #ff6b35;
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(255, 127, 80, 0.3);
+            box-shadow: 0 15px 35px rgba(74, 144, 226, 0.4);
         }
         
         .submit-btn:active {
@@ -690,24 +922,22 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 20px;
-            height: 20px;
-            margin: -10px 0 0 -10px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            width: 24px;
+            height: 24px;
+            margin: -12px 0 0 -12px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
             border-top-color: white;
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
         
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
         .form-message {
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 5px;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
             display: none;
+            font-weight: 500;
+            text-align: center;
         }
         
         .form-message.success {
@@ -730,41 +960,70 @@
         }
         
         .contact-container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 60px;
         }
         
         .contact-info {
-            padding: 20px;
+            padding: 10px;
         }
         
         .contact-item {
             display: flex;
-            align-items: center;
-            margin-bottom: 25px;
+            align-items: flex-start;
+            margin-bottom: 35px;
             transition: transform 0.3s;
+            padding: 20px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-soft);
         }
         
         .contact-item:hover {
             transform: translateX(10px);
+            box-shadow: var(--shadow-medium);
         }
         
         .contact-item i {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: var(--cascade-blue);
-            margin-right: 15px;
+            margin-right: 20px;
             width: 40px;
             text-align: center;
+            margin-top: 5px;
+        }
+        
+        .contact-item h4 {
+            color: var(--jungle-green);
+            margin-bottom: 8px;
+            font-size: 1.3rem;
+        }
+        
+        .contact-item p {
+            color: #555;
+            line-height: 1.7;
+        }
+        
+        .contact-item a {
+            color: var(--cascade-blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .contact-item a:hover {
+            color: var(--sunset-orange);
+            text-decoration: underline;
         }
         
         .map-container {
-            height: 300px;
-            border-radius: 10px;
+            height: 350px;
+            border-radius: var(--border-radius);
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-medium);
             transition: transform 0.3s;
         }
         
@@ -772,11 +1031,18 @@
             transform: scale(1.02);
         }
         
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
         /* Footer */
         footer {
-            background-color: var(--rock-brown);
+            background: linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%);
             color: white;
-            padding: 50px 20px 20px;
+            padding: 60px 5% 30px;
+            clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
         }
         
         .footer-content {
@@ -784,22 +1050,24 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
+            gap: 50px;
+            margin-bottom: 50px;
         }
         
         .footer-column h3 {
             color: var(--leaf-green);
-            margin-bottom: 20px;
-            font-size: 1.5rem;
+            margin-bottom: 25px;
+            font-size: 1.6rem;
+            font-weight: 600;
         }
         
         .footer-column p, .footer-column a {
             color: #ddd;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             display: block;
             text-decoration: none;
             transition: color 0.3s;
+            line-height: 1.7;
         }
         
         .footer-column a:hover {
@@ -810,36 +1078,42 @@
         .social-icons {
             display: flex;
             gap: 15px;
-            margin-top: 20px;
+            margin-top: 25px;
         }
         
         .social-icons a {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             background-color: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
-            transition: all 0.3s;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            font-size: 1.2rem;
         }
         
         .social-icons a:hover {
             background-color: var(--sunset-orange);
-            transform: translateY(-5px);
+            transform: translateY(-5px) rotate(5deg);
         }
         
         .copyright {
             text-align: center;
-            padding-top: 20px;
+            padding-top: 30px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: #aaa;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
         .copyright a {
             color: var(--leaf-green);
             text-decoration: none;
+            font-weight: 600;
         }
         
         .copyright a:hover {
@@ -854,11 +1128,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
             z-index: 2000;
             align-items: center;
             justify-content: center;
             padding: 20px;
+            backdrop-filter: blur(5px);
         }
         
         .confirmation-modal.active {
@@ -867,99 +1142,96 @@
         
         .modal-content {
             background: white;
-            padding: 40px;
-            border-radius: 10px;
-            max-width: 500px;
+            padding: 50px 40px;
+            border-radius: var(--border-radius);
+            max-width: 550px;
             width: 100%;
             text-align: center;
             position: relative;
-            animation: modalFadeIn 0.3s ease;
+            animation: modalFadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-hard);
         }
         
         @keyframes modalFadeIn {
             from {
                 opacity: 0;
-                transform: translateY(-30px);
+                transform: translateY(-40px) scale(0.9);
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateY(0) scale(1);
             }
         }
         
         .modal-content h3 {
             color: var(--jungle-green);
             margin-bottom: 20px;
-            font-size: 1.8rem;
+            font-size: 2rem;
         }
         
         .modal-content p {
-            margin-bottom: 30px;
-            line-height: 1.6;
+            margin-bottom: 35px;
+            line-height: 1.8;
+            color: #555;
+            font-size: 1.1rem;
         }
         
         .modal-content .whatsapp-btn {
             background-color: #25D366;
             color: white;
             border: none;
-            padding: 15px 30px;
-            border-radius: 5px;
-            font-size: 1.1rem;
-            font-weight: bold;
+            padding: 18px 30px;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: var(--transition-smooth);
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 15px;
+            gap: 12px;
+            margin-bottom: 20px;
             width: 100%;
         }
         
         .modal-content .whatsapp-btn:hover {
             background-color: #128C7E;
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.4);
         }
         
         .modal-content .close-modal {
             background-color: #f8f9fa;
             color: var(--text-dark);
-            border: 1px solid #ddd;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 1rem;
+            border: 2px solid #e1e5e9;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.1rem;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: var(--transition-smooth);
             width: 100%;
+            font-weight: 500;
         }
         
         .modal-content .close-modal:hover {
             background-color: #e9ecef;
+            border-color: #d1d9e0;
         }
         
         /* Responsive Design */
-        @media (max-width: 1024px) {
+        @media (max-width: 1200px) {
             .hero-content h1 {
-                font-size: 3rem;
+                font-size: 3.2rem;
             }
             
             .section-title {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
             }
         }
         
-        @media (max-width: 768px) {
+        @media (max-width: 992px) {
             .hero-content h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero-content p {
-                font-size: 1.1rem;
-            }
-            
-            .section-title {
-                font-size: 2rem;
+                font-size: 2.8rem;
             }
             
             .nav-links {
@@ -968,9 +1240,6 @@
             
             .hamburger {
                 display: block;
-                position: absolute;
-                top: 20px;
-                right: 20px;
             }
             
             .mobile-menu {
@@ -981,10 +1250,6 @@
                 grid-template-columns: 1fr;
             }
             
-            .group-types {
-                grid-template-columns: 1fr;
-            }
-            
             .about-content,
             .reservation-container,
             .contact-container,
@@ -992,12 +1257,71 @@
                 grid-template-columns: 1fr;
             }
             
+            .group-types {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
             .gallery-container {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             }
             
             section {
-                padding: 60px 20px;
+                padding: 80px 5%;
+            }
+            
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.4rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+                margin-bottom: 50px;
+            }
+            
+            .section-title:after {
+                width: 100px;
+            }
+            
+            .cta-button {
+                padding: 14px 35px;
+                font-size: 1.05rem;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .gallery-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .group-types {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                padding: 40px 25px;
+            }
+            
+            .logo h1 {
+                font-size: 1.5rem;
+            }
+            
+            .logo i {
+                font-size: 2.2rem;
             }
         }
         
@@ -1006,44 +1330,114 @@
                 font-size: 2rem;
             }
             
-            .cta-button {
-                padding: 12px 25px;
-                font-size: 1rem;
-                margin: 5px;
-                display: block;
-                width: 100%;
-            }
-            
             .section-title {
                 font-size: 1.8rem;
             }
             
-            .gallery-container {
-                grid-template-columns: 1fr;
+            .feature {
+                padding: 25px 20px;
             }
             
-            .modal-content {
-                padding: 30px 20px;
+            .feature i {
+                font-size: 2.5rem;
+            }
+            
+            .gallery-item {
+                height: 240px;
+            }
+            
+            .reservation-form,
+            .pricing {
+                padding: 30px 25px;
+            }
+            
+            .modal-content h3 {
+                font-size: 1.6rem;
+            }
+            
+            .modal-content p {
+                font-size: 1rem;
             }
         }
         
-        /* Animation des bulles d'eau */
-        @keyframes createBubbles {
-            0% { opacity: 0; }
-            20% { opacity: 1; }
-            100% {
-                transform: translateY(-100vh);
-                opacity: 0;
+        /* Performance et accessibilité */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #121212;
+                color: #e0e0e0;
+            }
+            
+            #about,
+            #reservation {
+                background: #1e1e1e;
+            }
+            
+            #gallery,
+            #contact {
+                background: #1a1a1a;
+            }
+            
+            .feature,
+            .pricing,
+            .reservation-form,
+            .contact-item {
+                background: #2d2d2d;
+                color: #e0e0e0;
+            }
+            
+            .form-control {
+                background: #2d2d2d;
+                border-color: #404040;
+                color: #e0e0e0;
+            }
+        }
+        
+        /* Styles d'impression */
+        @media print {
+            .cta-buttons,
+            .hamburger,
+            .mobile-menu,
+            .social-icons,
+            .confirmation-modal,
+            .submit-btn {
+                display: none !important;
+            }
+            
+            body {
+                color: black;
+                background: white;
+            }
+            
+            section {
+                break-inside: avoid;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader">
+            <div class="loader-inner"></div>
+            <div class="loader-inner"></div>
+            <div class="loader-inner"></div>
+        </div>
+        <div class="loading-text">Chargement...</div>
+    </div>
+
     <!-- Header avec animation d'eau -->
     <header>
         <div class="water-animation"></div>
         <div class="logo">
-            <i class="fas fa-home"></i>
+            <i class="fas fa-water"></i>
             <h1>Cascades de Banfora</h1>
         </div>
         
@@ -1080,8 +1474,14 @@
             <h1>Cascades de Banfora</h1>
             <p>Découvrez la Côte d'Azur du Burkina Faso, un joyau naturel aux eaux limpides et aux paysages à couper le souffle</p>
             <div class="cta-buttons">
-                <a href="#reservation" class="cta-button">Réserver une visite</a>
-                <a href="#about" class="cta-button secondary">Découvrir</a>
+                <a href="#reservation" class="cta-button">
+                    <i class="fas fa-calendar-check"></i>
+                    Réserver une visite
+                </a>
+                <a href="#about" class="cta-button secondary">
+                    <i class="fas fa-info-circle"></i>
+                    Découvrir
+                </a>
             </div>
         </div>
     </header>
@@ -1127,16 +1527,40 @@
         <h2 class="section-title">Galerie</h2>
         <div class="gallery-container">
             <div class="gallery-item">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuohh2pG28uXZl3q_H5V-2Ajpx7DgPG5MefA&s" alt="Cascades de Banfora">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuohh2pG28uXZl3q_H5V-2Ajpx7DgPG5MefA&s" 
+                     alt="Cascades de Banfora - Vue principale des chutes d'eau" 
+                     loading="lazy">
+                <div class="gallery-overlay">
+                    <h3>Chutes Principales</h3>
+                    <p>Les cascades majestueuses de Karfiguéla</p>
+                </div>
             </div>
             <div class="gallery-item">
-                <img src="https://www.infosculturedufaso.net/wp-content/uploads/2025/05/FB_IMG_1746896613718.jpg" alt="Nature autour des cascades">
+                <img src="https://www.infosculturedufaso.net/wp-content/uploads/2025/05/FB_IMG_1746896613718.jpg" 
+                     alt="Nature tropicale autour des cascades de Banfora" 
+                     loading="lazy">
+                <div class="gallery-overlay">
+                    <h3>Végétation Luxuriante</h3>
+                    <p>La flore exceptionnelle du site</p>
+                </div>
             </div>
             <div class="gallery-item">
-                <img src="https://media.routard.com/image/71/9/pt888.1213719.jpg" alt="Rivière et végétation">
+                <img src="https://media.routard.com/image/71/9/pt888.1213719.jpg" 
+                     alt="Rivière Comoé et végétation aux cascades" 
+                     loading="lazy">
+                <div class="gallery-overlay">
+                    <h3>Rivière Comoé</h3>
+                    <p>Le cours d'eau qui alimente les cascades</p>
+                </div>
             </div>
             <div class="gallery-item">
-                <img src="https://libreinfo.net/wp-content/uploads/2020/12/Banfora-2.jpg" alt="Visiteurs aux cascades">
+                <img src="https://libreinfo.net/wp-content/uploads/2020/12/Banfora-2.jpg" 
+                     alt="Visiteurs profitant des baignoires naturelles" 
+                     loading="lazy">
+                <div class="gallery-overlay">
+                    <h3>Baignoires Naturelles</h3>
+                    <p>Les bassins naturels pour la baignade</p>
+                </div>
             </div>
         </div>
     </section>
@@ -1153,18 +1577,18 @@
                 </div>
                 <div class="price-item">
                     <span class="category">Étrangers</span>
-                    <span class="price">500 F CFA</span>
+                    <span class="price">1000 F CFA</span>
                 </div>
                 <div class="price-item">
                     <span class="category">Enfants (moins de 12 ans)</span>
                     <span class="price">Gratuit</span>
                 </div>
                 
-                <h3 style="margin-top: 30px;">Groupes bénéficiant de tarifs spéciaux</h3>
-                <p style="margin-top: 10px;">Nous proposons des visites guidées adaptées pour tous les types de groupes avec des tarifs préférentiels.</p>
+                <h3 style="margin-top: 40px; color: var(--rock-brown);">Groupes bénéficiant de tarifs spéciaux</h3>
+                <p style="margin-top: 15px; color: #666;">Nous proposons des visites guidées adaptées pour tous les types de groupes avec des tarifs préférentiels.</p>
                 
-                <h3 style="margin-top: 30px;">Informations importantes</h3>
-                <p style="margin-top: 10px; font-style: italic;">La seule stricte interdiction est de passer la nuit sur le site. Le site est ouvert tous les jours de 8h à 18h.</p>
+                <h3 style="margin-top: 40px; color: var(--rock-brown);">Informations importantes</h3>
+                <p style="margin-top: 15px; font-style: italic; color: #666;">La seule stricte interdiction est de passer la nuit sur le site. Le site est ouvert tous les jours de 8h à 18h.</p>
             </div>
             
             <div class="reservation-form">
@@ -1191,17 +1615,17 @@
                                 <p>Famille</p>
                             </div>
                         </div>
-                        <input type="hidden" id="groupType" name="groupType" value="school">
+                        <input type="hidden" id="groupType" name="groupType" value="school" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="groupName">Nom du groupe / Organisation</label>
-                        <input type="text" id="groupName" name="groupName" required>
+                        <input type="text" id="groupName" name="groupName" placeholder="Ex: Lycée Municipal" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="participants">Nombre de participants</label>
-                        <input type="number" id="participants" name="participants" min="3" max="500" required>
+                        <input type="number" id="participants" name="participants" min="3" max="500" placeholder="Ex: 25" required>
                     </div>
                     
                     <div class="form-group">
@@ -1211,17 +1635,17 @@
                     
                     <div class="form-group">
                         <label for="contactName">Nom du responsable</label>
-                        <input type="text" id="contactName" name="contactName" required>
+                        <input type="text" id="contactName" name="contactName" placeholder="Ex: Kevin SANOU" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="contactEmail">Email de contact</label>
-                        <input type="email" id="contactEmail" name="contactEmail" required>
+                        <input type="email" id="contactEmail" name="contactEmail" placeholder="nticsolution.bf@email.com" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="contactPhone">Téléphone de contact</label>
-                        <input type="tel" id="contactPhone" name="contactPhone" required>
+                        <input type="tel" id="contactPhone" name="contactPhone" placeholder="+226 05 58 58 68" required>
                     </div>
                     
                     <div class="form-group">
@@ -1242,8 +1666,6 @@
         <h2 class="section-title">Contact et localisation</h2>
         <div class="contact-container">
             <div class="contact-info">
-                <h3>Informations de contact</h3>
-                
                 <div class="contact-item">
                     <i class="fas fa-map-marker-alt"></i>
                     <div>
@@ -1270,8 +1692,15 @@
             </div>
             
             <div class="map-container">
-                <!-- Carte illustrative des cascades -->
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126747.2936483476!2d-4.819256323200751!3d10.63320423471013!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xeb5ee8e928b3e3f%3A0x9cac4114b7c7b6c2!2sBanfora%20Waterfalls!5e0!3m2!1sen!2sbf!4v1691234567890!5m2!1sen!2sbf" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126747.2936483476!2d-4.819256323200751!3d10.63320423471013!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xeb5ee8e928b3e3f%3A0x9cac4114b7c7b6c2!2sBanfora%20Waterfalls!5e0!3m2!1sen!2sbf!4v1691234567890!5m2!1sen!2sbf" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Carte des Cascades de Banfora">
+                </iframe>
             </div>
         </div>
     </section>
@@ -1283,10 +1712,10 @@
                 <h3>Cascades de Banfora</h3>
                 <p>Découvrez l'un des sites touristiques les plus importants du Burkina Faso, véritable joyau naturel de la région des Cascades.</p>
                 <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
             
@@ -1302,14 +1731,14 @@
                 <h3>Informations pratiques</h3>
                 <p><i class="far fa-clock"></i> Ouvert tous les jours: 8h - 18h</p>
                 <p><i class="fas fa-ban"></i> Nuitée interdite sur le site</p>
-                <p><i class="fas fa-ticket-alt"></i> Tarifs: 200-500 FCFA</p>
+                <p><i class="fas fa-ticket-alt"></i> Tarifs: 200-1000 FCFA</p>
                 <p><i class="fas fa-map-marker-alt"></i> Karfiguéla, Banfora, Burkina Faso</p>
             </div>
         </div>
         
         <div class="copyright">
             <p>Ce site est mis en ligne gracieusement par <a href="https://nticsolution.org"> <strong>NTIC SOLUTION</strong></a> pour contribuer au développement de la commune de Banfora et de toute la région des Cascades.</p>
-            <p>&copy; 2026 Cascades de Banfora - Tous droits réservés</p>
+            <p>&copy; <span id="currentYear">2026</span> Cascades de Banfora - Tous droits réservés</p>
         </div>
     </footer>
     
@@ -1327,303 +1756,474 @@
     </div>
 
     <script>
-        // Données pour la génération du message WhatsApp
-        let reservationData = null;
-        const whatsappNumber = "+22602717155";
-        
-        // Types de groupe en français
-        const groupTypeNames = {
-            'school': 'Établissement scolaire',
-            'training': 'Centre de formation',
-            'friends': "Groupe d'amis",
-            'family': 'Famille'
-        };
-        
-        // Animation pour la sélection du type de groupe
-        document.querySelectorAll('.group-type').forEach(item => {
-            item.addEventListener('click', event => {
-                // Retirer la classe active de tous les éléments
-                document.querySelectorAll('.group-type').forEach(el => {
-                    el.classList.remove('active');
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Préloader
+            window.addEventListener('load', function() {
+                const preloader = document.getElementById('preloader');
+                setTimeout(() => {
+                    preloader.style.opacity = '0';
+                    setTimeout(() => {
+                        preloader.style.display = 'none';
+                    }, 500);
+                }, 1000);
+            });
+
+            // Mettre à jour l'année du copyright
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            // Types de groupe en français
+            const groupTypeNames = {
+                'school': 'Établissement scolaire',
+                'training': 'Centre de formation',
+                'friends': "Groupe d'amis",
+                'family': 'Famille'
+            };
+
+            // Animation pour la sélection du type de groupe
+            document.querySelectorAll('.group-type').forEach(item => {
+                item.addEventListener('click', event => {
+                    // Retirer la classe active de tous les éléments
+                    document.querySelectorAll('.group-type').forEach(el => {
+                        el.classList.remove('active');
+                    });
+                    
+                    // Ajouter la classe active à l'élément cliqué
+                    item.classList.add('active');
+                    
+                    // Mettre à jour la valeur du champ caché
+                    document.getElementById('groupType').value = item.getAttribute('data-value');
+                });
+            });
+
+            // Gestion de la soumission du formulaire
+            document.getElementById('bookingForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const submitBtn = document.getElementById('submitBtn');
+                const formMessage = document.getElementById('formMessage');
+                
+                // Récupération des données du formulaire
+                const groupType = document.getElementById('groupType').value;
+                const groupName = document.getElementById('groupName').value.trim();
+                const participants = document.getElementById('participants').value;
+                const visitDate = document.getElementById('visitDate').value;
+                const contactName = document.getElementById('contactName').value.trim();
+                const contactEmail = document.getElementById('contactEmail').value.trim();
+                const contactPhone = document.getElementById('contactPhone').value.trim();
+                const specialRequests = document.getElementById('specialRequests').value.trim();
+                
+                // Validation des champs
+                if (!groupName || !participants || !visitDate || !contactName || !contactEmail || !contactPhone) {
+                    showMessage('Veuillez remplir tous les champs obligatoires.', 'error');
+                    return;
+                }
+                
+                if (participants < 3 || participants > 500) {
+                    showMessage('Le nombre de participants doit être entre 3 et 500.', 'error');
+                    return;
+                }
+                
+                // Formatage de la date
+                const formattedDate = new Date(visitDate).toLocaleDateString('fr-FR', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
                 });
                 
-                // Ajouter la classe active à l'élément cliqué
-                item.classList.add('active');
+                // Stocker les données pour WhatsApp
+                window.reservationData = {
+                    groupType: groupTypeNames[groupType],
+                    groupName: groupName,
+                    participants: participants,
+                    visitDate: formattedDate,
+                    contactName: contactName,
+                    contactEmail: contactEmail,
+                    contactPhone: contactPhone,
+                    specialRequests: specialRequests || 'Aucune demande spéciale'
+                };
                 
-                // Mettre à jour la valeur du champ caché
-                document.getElementById('groupType').value = item.getAttribute('data-value');
+                // Afficher le bouton de chargement
+                submitBtn.classList.add('loading');
+                
+                // Simuler un délai d'envoi
+                setTimeout(() => {
+                    // Afficher le modal de confirmation
+                    document.getElementById('confirmationModal').classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                    
+                    // Réinitialiser le formulaire
+                    this.reset();
+                    document.querySelectorAll('.group-type').forEach(el => el.classList.remove('active'));
+                    document.querySelector('.group-type[data-value="school"]').classList.add('active');
+                    document.getElementById('groupType').value = 'school';
+                    
+                    // Retirer le bouton de chargement
+                    submitBtn.classList.remove('loading');
+                    
+                    // Afficher un message de succès
+                    showMessage('Formulaire envoyé avec succès !', 'success');
+                }, 1500);
             });
-        });
-        
-        // Gestion de la soumission du formulaire
-        document.getElementById('bookingForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const submitBtn = document.getElementById('submitBtn');
-            const formMessage = document.getElementById('formMessage');
-            
-            // Récupération des données du formulaire
-            const groupType = document.getElementById('groupType').value;
-            const groupName = document.getElementById('groupName').value.trim();
-            const participants = document.getElementById('participants').value;
-            const visitDate = document.getElementById('visitDate').value;
-            const contactName = document.getElementById('contactName').value.trim();
-            const contactEmail = document.getElementById('contactEmail').value.trim();
-            const contactPhone = document.getElementById('contactPhone').value.trim();
-            const specialRequests = document.getElementById('specialRequests').value.trim();
-            
-            // Validation des champs
-            if (!groupName || !participants || !visitDate || !contactName || !contactEmail || !contactPhone) {
-                showMessage('Veuillez remplir tous les champs obligatoires.', 'error');
-                return;
-            }
-            
-            if (participants < 3 || participants > 500) {
-                showMessage('Le nombre de participants doit être entre 3 et 500.', 'error');
-                return;
-            }
-            
-            // Formatage de la date
-            const formattedDate = new Date(visitDate).toLocaleDateString('fr-FR', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            });
-            
-            // Stocker les données pour WhatsApp
-            reservationData = {
-                groupType: groupTypeNames[groupType],
-                groupName: groupName,
-                participants: participants,
-                visitDate: formattedDate,
-                contactName: contactName,
-                contactEmail: contactEmail,
-                contactPhone: contactPhone,
-                specialRequests: specialRequests || 'Aucune'
-            };
-            
-            // Afficher le bouton de chargement
-            submitBtn.classList.add('loading');
-            
-            // Simuler un délai d'envoi
-            setTimeout(() => {
-                // Afficher le modal de confirmation
-                document.getElementById('confirmationModal').classList.add('active');
-                
-                // Réinitialiser le formulaire
-                document.getElementById('bookingForm').reset();
-                document.querySelectorAll('.group-type').forEach(el => el.classList.remove('active'));
-                document.querySelector('.group-type[data-value="school"]').classList.add('active');
-                document.getElementById('groupType').value = 'school';
-                
-                // Retirer le bouton de chargement
-                submitBtn.classList.remove('loading');
-            }, 1500);
-        });
-        
-        // Fonction pour afficher les messages
-        function showMessage(message, type) {
-            const formMessage = document.getElementById('formMessage');
-            formMessage.textContent = message;
-            formMessage.className = `form-message ${type}`;
-            
-            // Masquer le message après 5 secondes
-            setTimeout(() => {
-                formMessage.className = 'form-message';
-            }, 5000);
-        }
-        
-        // Gestion du bouton WhatsApp
-        document.getElementById('whatsappBtn').addEventListener('click', function() {
-            if (!reservationData) return;
-            
-            // Création du message structuré
-            const message = `*NOUVELLE DEMANDE DE RÉSERVATION - CASCADES DE BANFORA*
 
-*Type de groupe:* ${reservationData.groupType}
-*Nom du groupe/organisation:* ${reservationData.groupName}
-*Nombre de participants:* ${reservationData.participants}
-*Date de visite souhaitée:* ${reservationData.visitDate}
+            // Fonction pour afficher les messages
+            function showMessage(message, type) {
+                const formMessage = document.getElementById('formMessage');
+                formMessage.textContent = message;
+                formMessage.className = `form-message ${type}`;
+                
+                // Masquer le message après 5 secondes
+                setTimeout(() => {
+                    formMessage.className = 'form-message';
+                    formMessage.textContent = '';
+                }, 5000);
+            }
+
+            // Gestion du bouton WhatsApp
+            document.getElementById('whatsappBtn').addEventListener('click', function() {
+                if (!window.reservationData) return;
+                
+                // Création du message structuré
+                const message = `*NOUVELLE DEMANDE DE RÉSERVATION - CASCADES DE BANFORA*
+
+*Type de groupe:* ${window.reservationData.groupType}
+*Nom du groupe/organisation:* ${window.reservationData.groupName}
+*Nombre de participants:* ${window.reservationData.participants}
+*Date de visite souhaitée:* ${window.reservationData.visitDate}
 
 *INFORMATIONS DE CONTACT:*
-*Nom du responsable:* ${reservationData.contactName}
-*Email:* ${reservationData.contactEmail}
-*Téléphone:* ${reservationData.contactPhone}
+*Nom du responsable:* ${window.reservationData.contactName}
+*Email:* ${window.reservationData.contactEmail}
+*Téléphone:* ${window.reservationData.contactPhone}
 
 *DEMANDES SPÉCIALES:*
-${reservationData.specialRequests}
+${window.reservationData.specialRequests}
 
 ---
 Cette demande a été envoyée via le site web des Cascades de Banfora.`;
-            
-            // Encodage du message pour URL
-            const encodedMessage = encodeURIComponent(message);
-            
-            // Création du lien WhatsApp
-            const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-            
-            // Ouvrir WhatsApp dans un nouvel onglet
-            window.open(whatsappLink, '_blank');
-            
-            // Fermer le modal
-            document.getElementById('confirmationModal').classList.remove('active');
-            
-            // Afficher un message de confirmation
-            showMessage('WhatsApp ouvert avec votre message de réservation. Veuillez l\'envoyer pour finaliser votre demande.', 'success');
-        });
-        
-        // Fermeture du modal
-        document.getElementById('closeModal').addEventListener('click', function() {
-            document.getElementById('confirmationModal').classList.remove('active');
-        });
-        
-        // Fermer le modal en cliquant à l'extérieur
-        document.getElementById('confirmationModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                this.classList.remove('active');
-            }
-        });
-        
-        // Menu mobile
-        const hamburger = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const closeMenu = document.getElementById('closeMenu');
-        const overlay = document.getElementById('overlay');
-        const mobileLinks = document.querySelectorAll('.mobile-link');
-        
-        hamburger.addEventListener('click', () => {
-            mobileMenu.classList.add('active');
-            overlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
-        
-        closeMenu.addEventListener('click', () => {
-            mobileMenu.classList.remove('active');
-            overlay.classList.remove('active');
-            document.body.style.overflow = '';
-        });
-        
-        overlay.addEventListener('click', () => {
-            mobileMenu.classList.remove('active');
-            overlay.classList.remove('active');
-            document.body.style.overflow = '';
-        });
-        
-        // Fermer le menu mobile après avoir cliqué sur un lien
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
+                
+                // Encodage du message pour URL
+                const encodedMessage = encodeURIComponent(message);
+                
+                // Création du lien WhatsApp
+                const whatsappLink = `https://wa.me/+22602717155?text=${encodedMessage}`;
+                
+                // Ouvrir WhatsApp dans un nouvel onglet
+                window.open(whatsappLink, '_blank');
+                
+                // Fermer le modal
+                document.getElementById('confirmationModal').classList.remove('active');
+                document.body.style.overflow = '';
+                
+                // Afficher un message de confirmation
+                showMessage('WhatsApp ouvert avec votre message de réservation. Veuillez l\'envoyer pour finaliser votre demande.', 'success');
+            });
+
+            // Fermeture du modal
+            document.getElementById('closeModal').addEventListener('click', function() {
+                document.getElementById('confirmationModal').classList.remove('active');
+                document.body.style.overflow = '';
+            });
+
+            // Fermer le modal en cliquant à l'extérieur
+            document.getElementById('confirmationModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // Menu mobile
+            const hamburger = document.getElementById('hamburger');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const closeMenu = document.getElementById('closeMenu');
+            const overlay = document.getElementById('overlay');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            hamburger.addEventListener('click', () => {
+                mobileMenu.classList.add('active');
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+
+            closeMenu.addEventListener('click', () => {
                 mobileMenu.classList.remove('active');
                 overlay.classList.remove('active');
                 document.body.style.overflow = '';
             });
-        });
-        
-        // Définir la date minimum pour la réservation (demain)
-        const tomorrow = new Date();
-        tomorrow.setDate(tomorrow.getDate() + 1);
-        const tomorrowFormatted = tomorrow.toISOString().split('T')[0];
-        document.getElementById('visitDate').min = tomorrowFormatted;
-        
-        // Animation au défilement pour les sections
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+
+            overlay.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
             });
-        }, observerOptions);
-        
-        // Appliquer l'animation aux sections
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
-        });
-        
-        // Animation des bulles d'eau
-        function createBubbles() {
-            const header = document.querySelector('header');
-            const bubbleCount = 15;
-            
-            for (let i = 0; i < bubbleCount; i++) {
-                setTimeout(() => {
-                    const bubble = document.createElement('div');
-                    bubble.classList.add('bubble');
-                    
-                    // Taille aléatoire
-                    const size = Math.random() * 60 + 20;
-                    bubble.style.width = `${size}px`;
-                    bubble.style.height = `${size}px`;
-                    
-                    // Position aléatoire
-                    bubble.style.left = `${Math.random() * 100}%`;
-                    
-                    // Délai d'animation aléatoire
-                    const delay = Math.random() * 5;
-                    bubble.style.animationDelay = `${delay}s`;
-                    
-                    // Durée d'animation aléatoire
-                    const duration = Math.random() * 10 + 10;
-                    bubble.style.animationDuration = `${duration}s`;
-                    
-                    header.appendChild(bubble);
-                    
-                    // Supprimer la bulle après l'animation
+
+            // Fermer le menu mobile après avoir cliqué sur un lien
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+
+            // Définir la date minimum pour la réservation (demain)
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            const tomorrowFormatted = tomorrow.toISOString().split('T')[0];
+            document.getElementById('visitDate').min = tomorrowFormatted;
+
+            // Animation au défilement pour les sections
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            // Appliquer l'animation aux sections
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
+            });
+
+            // Animation des bulles d'eau
+            function createBubbles() {
+                const header = document.querySelector('header');
+                const bubbleCount = 20;
+                
+                for (let i = 0; i < bubbleCount; i++) {
                     setTimeout(() => {
-                        bubble.remove();
-                    }, (duration + delay) * 1000);
-                }, i * 300);
+                        const bubble = document.createElement('div');
+                        bubble.classList.add('bubble');
+                        
+                        // Taille aléatoire
+                        const size = Math.random() * 60 + 20;
+                        bubble.style.width = `${size}px`;
+                        bubble.style.height = `${size}px`;
+                        
+                        // Position aléatoire
+                        bubble.style.left = `${Math.random() * 100}%`;
+                        
+                        // Délai d'animation aléatoire
+                        const delay = Math.random() * 5;
+                        bubble.style.animationDelay = `${delay}s`;
+                        
+                        // Durée d'animation aléatoire
+                        const duration = Math.random() * 10 + 10;
+                        bubble.style.animationDuration = `${duration}s`;
+                        
+                        header.appendChild(bubble);
+                        
+                        // Supprimer la bulle après l'animation
+                        setTimeout(() => {
+                            if (bubble.parentNode) {
+                                bubble.remove();
+                            }
+                        }, (duration + delay) * 1000);
+                    }, i * 150);
+                }
             }
-        }
-        
-        // Créer des bulles initiales
-        createBubbles();
-        
-        // Créer des bulles toutes les 20 secondes
-        setInterval(createBubbles, 20000);
-        
-        // Animation du logo
-        const logoIcon = document.querySelector('.logo i');
-        setInterval(() => {
-            logoIcon.style.transform = 'scale(1.1)';
-            setTimeout(() => {
-                logoIcon.style.transform = 'scale(1)';
-            }, 300);
-        }, 3000);
-        
-        // Navigation fluide
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
+
+            // Créer des bulles initiales
+            createBubbles();
+            
+            // Créer des bulles toutes les 20 secondes
+            setInterval(createBubbles, 20000);
+
+            // Animation du logo
+            const logoIcon = document.querySelector('.logo i');
+            setInterval(() => {
+                logoIcon.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    logoIcon.style.transform = 'scale(1)';
+                }, 300);
+            }, 3000);
+
+            // Navigation fluide
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Effet de parallaxe sur le header
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const header = document.querySelector('header');
+                const waterAnimation = document.querySelector('.water-animation');
                 
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
+                if (header && waterAnimation) {
+                    header.style.transform = `translateY(${scrolled * 0.5}px)`;
+                    waterAnimation.style.transform = `translateY(${scrolled * 0.3}px)`;
+                }
+            });
+
+            // Ajouter des effets de hover aux cartes
+            document.querySelectorAll('.feature').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-12px)';
+                });
                 
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Optimisation des images - lazy loading
+            const images = document.querySelectorAll('img[loading="lazy"]');
+            images.forEach(img => {
+                img.addEventListener('load', function() {
+                    this.classList.add('loaded');
+                });
+            });
+
+            // Gestion du clavier pour l'accessibilité
+            document.addEventListener('keydown', function(e) {
+                // Fermer le modal avec Escape
+                if (e.key === 'Escape') {
+                    const modal = document.getElementById('confirmationModal');
+                    if (modal.classList.contains('active')) {
+                        modal.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                    
+                    const mobile = document.getElementById('mobileMenu');
+                    if (mobile.classList.contains('active')) {
+                        mobile.classList.remove('active');
+                        document.getElementById('overlay').classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                }
+            });
+
+            // Web Share API
+            if (navigator.share) {
+                const shareBtn = document.createElement('button');
+                shareBtn.innerHTML = '<i class="fas fa-share-alt"></i> Partager';
+                shareBtn.className = 'cta-button secondary';
+                shareBtn.style.marginTop = '15px';
+                shareBtn.addEventListener('click', async () => {
+                    try {
+                        await navigator.share({
+                            title: 'Cascades de Banfora',
+                            text: 'Découvrez les magnifiques Cascades de Banfora au Burkina Faso',
+                            url: window.location.href
+                        });
+                    } catch (err) {
+                        console.log('Erreur de partage:', err);
+                    }
+                });
+                document.querySelector('.hero-content .cta-buttons').appendChild(shareBtn);
+            }
+
+            // Ajouter un bouton "retour en haut"
+            const scrollToTopBtn = document.createElement('button');
+            scrollToTopBtn.innerHTML = '<i class="fas fa-chevron-up"></i>';
+            scrollToTopBtn.style.cssText = `
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                width: 50px;
+                height: 50px;
+                background: var(--gradient-primary);
+                color: white;
+                border: none;
+                border-radius: 50%;
+                cursor: pointer;
+                font-size: 1.2rem;
+                z-index: 100;
+                opacity: 0;
+                transform: translateY(20px);
+                transition: var(--transition-smooth);
+                box-shadow: var(--shadow-medium);
+            `;
+            document.body.appendChild(scrollToTopBtn);
+
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    scrollToTopBtn.style.opacity = '1';
+                    scrollToTopBtn.style.transform = 'translateY(0)';
+                } else {
+                    scrollToTopBtn.style.opacity = '0';
+                    scrollToTopBtn.style.transform = 'translateY(20px)';
                 }
             });
         });
-        
-        // Effet de parallaxe sur le header
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const header = document.querySelector('header');
-            const waterAnimation = document.querySelector('.water-animation');
-            
-            if (header && waterAnimation) {
-                header.style.transform = `translateY(${scrolled * 0.5}px)`;
-                waterAnimation.style.transform = `translateY(${scrolled * 0.3}px)`;
-            }
-        });
+    </script>
+
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TouristAttraction",
+        "name": "Cascades de Banfora",
+        "alternateName": "Cascades de Karfiguéla",
+        "description": "Les cascades de Banfora, également appelées cascades de Karfiguéla, sont l'un des sites touristiques les plus importants du Burkina Faso. Situées à 12km au nord-ouest de Banfora, elles offrent des baignoires naturelles et des paysages spectaculaires.",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Banfora",
+            "addressRegion": "Cascades",
+            "addressCountry": "Burkina Faso"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "10.633333",
+            "longitude": "-4.766667"
+        },
+        "openingHours": "Mo-Su 08:00-18:00",
+        "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+                "Sunday"
+            ],
+            "opens": "08:00",
+            "closes": "18:00"
+        },
+        "priceRange": "200 - 1000 FCFA",
+        "currenciesAccepted": "FCFA",
+        "image": [
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuohh2pG28uXZl3q_H5V-2Ajpx7DgPG5MefA&s",
+            "https://www.infosculturedufaso.net/wp-content/uploads/2025/05/FB_IMG_1746896613718.jpg",
+            "https://media.routard.com/image/71/9/pt888.1213719.jpg",
+            "https://libreinfo.net/wp-content/uploads/2020/12/Banfora-2.jpg"
+        ],
+        "url": "https://cascades.tannounyan.online",
+        "telephone": "+22602717155",
+        "sameAs": [
+            "https://www.infosculturedufaso.net/"
+        ]
+    }
     </script>
 </body>
 </html>
