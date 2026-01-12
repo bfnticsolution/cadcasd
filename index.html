@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cascades de Banfora - La Côte d'Azur du Burkina Faso</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Variables de couleurs inspirées de l'écosystème */
+        :root {
+            --cascade-blue: #4a90e2;
+            --jungle-green: #2e8b57;
+            --rock-brown: #8b7355;
+            --sunset-orange: #ff7f50;
+            --leaf-green: #7cfc00;
+            --water-light: #e0f7fa;
+            --text-dark: #333;
+            --text-light: #fff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        /* Header et navigation */
+        header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), 
+                        url('https://www.infosculturedufaso.net/wp-content/uploads/2025/05/FB_IMG_1746896613718.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .water-animation {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('https://www.infosculturedufaso.net/wp-content/uploads/2025/05/FB_IMG_1746896613718.jpg');
+            background-size: cover;
+            opacity: 0.6;
+            animation: waterFlow 20s linear infinite;
+        }
+        
+        @keyframes waterFlow {
+            0% { background-position: 0 0; }
+            100% { background-position: 1000px 0; }
+        }
+        
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            font-size: 2.5rem;
+            color: var(--cascade-blue);
+        }
+        
+        .logo h1 {
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        nav {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+        
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            z-index: 1;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--sunset-orange);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: transform 0.3s, background-color 0.3s;
+            margin: 10px;
+        }
+        
+        .cta-button:hover {
+            background-color: #ff6b35;
+            transform: translateY(-5px);
+        }
+        
+        /* Sections générales */
+        section {
+            padding: 80px 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--jungle-green);
+            font-size: 2.5rem;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background-color: var(--sunset-orange);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        /* Section À propos */
+        #about {
+            background-color: white;
+        }
+        
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .about-text {
+            padding-right: 20px;
+        }
+        
+        .about-text h3 {
+            color: var(--rock-brown);
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .feature {
+            background-color: var(--water-light);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .feature:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature i {
+            font-size: 2.5rem;
+            color: var(--cascade-blue);
+            margin-bottom: 15px;
+        }
+        
+        /* Section Galerie */
+        #gallery {
+            background-color: #f9f9f9;
+        }
+        
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            height: 250px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        /* Section Réservation */
+        #reservation {
+            background-color: white;
+        }
+        
+        .reservation-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .pricing {
+            background-color: var(--water-light);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px dashed #ccc;
+        }
+        
+        .price-item:last-child {
+            border-bottom: none;
+        }
+        
+        .price-item .category {
+            font-weight: bold;
+            color: var(--jungle-green);
+        }
+        
+        .price-item .price {
+            font-weight: bold;
+            color: var(--sunset-orange);
+        }
+        
+        .reservation-form {
+            padding: 30px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--rock-brown);
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--cascade-blue);
+        }
+        
+        .group-types {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .group-type {
+            background-color: white;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            border: 2px solid #ddd;
+            transition: all 0.3s;
+        }
+        
+        .group-type.active {
+            border-color: var(--cascade-blue);
+            background-color: var(--water-light);
+        }
+        
+        .group-type i {
+            font-size: 2rem;
+            color: var(--cascade-blue);
+            margin-bottom: 10px;
+        }
+        
+        .submit-btn {
+            background-color: var(--sunset-orange);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #ff6b35;
+        }
+        
+        /* Section Contact */
+        #contact {
+            background-color: #f9f9f9;
+        }
+        
+        .contact-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .contact-info {
+            padding: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--cascade-blue);
+            margin-right: 15px;
+            width: 40px;
+        }
+        
+        .map-container {
+            height: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--rock-brown);
+            color: white;
+            padding: 50px 20px 20px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            color: var(--leaf-green);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .footer-column p, .footer-column a {
+            color: #ddd;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--sunset-orange);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            nav {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin-top: 20px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .group-types {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header avec animation d'eau -->
+    <header>
+        <div class="water-animation"></div>
+        <div class="logo">
+            <i class="fas fa-water"></i>
+            <h1>Cascades de Banfora</h1>
+        </div>
+        
+        <nav>
+            <ul>
+                <li><a href="#about">À propos</a></li>
+                <li><a href="#gallery">Galerie</a></li>
+                <li><a href="#reservation">Réservation</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        
+        <div class="hero-content">
+            <h1>Cascades de Banfora</h1>
+            <p>Découvrez la Côte d'Azur du Burkina Faso, un joyau naturel aux eaux limpides et aux paysages à couper le souffle</p>
+            <a href="#reservation" class="cta-button">Réserver une visite</a>
+            <a href="#about" class="cta-button" style="background-color: var(--jungle-green);">Découvrir</a>
+        </div>
+    </header>
+    
+    <!-- Section À propos -->
+    <section id="about">
+        <h2 class="section-title">À propos des Cascades</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Les Cascades de Karfiguéla</h3>
+                <p>Situées à environ 12 km au nord-ouest de Banfora, les cascades de Banfora (ou cascades de Karfiguéla) constituent l'un des sites touristiques les plus importants du Burkina Faso. La région des Cascades tire son nom de ces chutes d'eau.</p>
+                <p>Dans la chaleur du Burkina, entendre le son de l'eau qui coule au loin est en soi une délivrance. Une dizaine de baignoires naturelles et de bains à remous remplis d'une eau limpide et glacée vous y attendent.</p>
+                <p>Le site tire son nom local, Karfiguéla, du village voisin. Il s'agit d'une nappe d'eau souterraine qui ressurgit, créant des chutes sur plusieurs niveaux le long du fleuve Comoé.</p>
+            </div>
+            
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-tree"></i>
+                    <h3>Nature préservée</h3>
+                    <p>Une végétation comparable à celle des pays côtiers</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-water"></i>
+                    <h3>Eaux cristallines</h3>
+                    <p>Une dizaine de baignoires naturelles à découvrir</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-hiking"></i>
+                    <h3>Accès facile</h3>
+                    <p>Escaliers taillés dans la roche et passerelles</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-camera"></i>
+                    <h3>Vues spectaculaires</h3>
+                    <p>Des paysages à couper le souffle pour vos photos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Section Galerie -->
+    <section id="gallery">
+        <h2 class="section-title">Galerie</h2>
+        <div class="gallery-container">
+            <div class="gallery-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuohh2pG28uXZl3q_H5V-2Ajpx7DgPG5MefA&s" alt="Cascades de Banfora">
+            </div>
+            <div class="gallery-item">
+                <img src="https://www.infosculturedufaso.net/wp-content/uploads/2025/05/FB_IMG_1746896613718.jpg" alt="Nature autour des cascades">
+            </div>
+            <div class="gallery-item">
+                <img src="https://media.routard.com/image/71/9/pt888.1213719.jpg" alt="Rivière et végétation">
+            </div>
+            <div class="gallery-item">
+                <img src="https://libreinfo.net/wp-content/uploads/2020/12/Banfora-2.jpg" alt="Visiteurs aux cascades">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Section Réservation -->
+    <section id="reservation">
+        <h2 class="section-title">Réserver une visite</h2>
+        <div class="reservation-container">
+            <div class="pricing">
+                <h3>Tarifs d'entrée</h3>
+                <div class="price-item">
+                    <span class="category">Visiteurs nationaux</span>
+                    <span class="price">200 F CFA</span>
+                </div>
+                <div class="price-item">
+                    <span class="category">Étrangers</span>
+                    <span class="price">500 F CFA</span>
+                </div>
+                <div class="price-item">
+                    <span class="category">Enfants (moins de 12 ans)</span>
+                    <span class="price">Gratuit</span>
+                </div>
+                
+                <h3 style="margin-top: 30px;">Groupes bénéficiant de tarifs spéciaux</h3>
+                <p style="margin-top: 10px;">Nous proposons des visites guidées adaptées pour tous les types de groupes avec des tarifs préférentiels.</p>
+                
+                <h3 style="margin-top: 30px;">Informations importantes</h3>
+                <p style="margin-top: 10px; font-style: italic;">La seule stricte interdiction est de passer la nuit sur le site. Le site est ouvert tous les jours de 8h à 18h.</p>
+            </div>
+            
+            <div class="reservation-form">
+                <h3>Formulaire de réservation pour groupes</h3>
+                <form id="bookingForm">
+                    <div class="form-group">
+                        <label for="groupType">Type de groupe</label>
+                        <div class="group-types">
+                            <div class="group-type active" data-value="school">
+                                <i class="fas fa-school"></i>
+                                <p>Établissement scolaire</p>
+                            </div>
+                            <div class="group-type" data-value="training">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                                <p>Centre de formation</p>
+                            </div>
+                            <div class="group-type" data-value="friends">
+                                <i class="fas fa-users"></i>
+                                <p>Groupe d'amis</p>
+                            </div>
+                            <div class="group-type" data-value="family">
+                                <i class="fas fa-home"></i>
+                                <p>Famille</p>
+                            </div>
+                        </div>
+                        <input type="hidden" id="groupType" name="groupType" value="school">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="groupName">Nom du groupe / Organisation</label>
+                        <input type="text" id="groupName" name="groupName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="participants">Nombre de participants</label>
+                        <input type="number" id="participants" name="participants" min="3" max="500" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="visitDate">Date de visite souhaitée</label>
+                        <input type="date" id="visitDate" name="visitDate" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactName">Nom du responsable</label>
+                        <input type="text" id="contactName" name="contactName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactEmail">Email de contact</label>
+                        <input type="email" id="contactEmail" name="contactEmail" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactPhone">Téléphone de contact</label>
+                        <input type="tel" id="contactPhone" name="contactPhone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="specialRequests">Demandes spéciales</label>
+                        <textarea id="specialRequests" name="specialRequests" rows="4" placeholder="Visite guidée, pique-nique sur place, etc."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Envoyer la demande de réservation</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Section Contact -->
+    <section id="contact">
+        <h2 class="section-title">Contact et localisation</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Informations de contact</h3>
+                
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h4>Localisation</h4>
+                        <p>Cascades de Karfiguéla, à 12km au nord-ouest de Banfora, Burkina Faso</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-info-circle"></i>
+                    <div>
+                        <h4>À propos du site</h4>
+                        <p>Le site est ouvert tous les jours de 8h à 18h. Nuitée interdite sur place.</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-handshake"></i>
+                    <div>
+                        <h4>Notre engagement</h4>
+                        <p>Ce site est mis en ligne gracieusement par <a href="https://nticsolution.org"> <strong>NTIC SOLUTION</strong></a> pour contribuer au développement de la commune de Banfora et de toute la région.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="map-container">
+                <!-- Carte illustrative des cascades -->
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126747.2936483476!2d-4.819256323200751!3d10.63320423471013!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xeb5ee8e928b3e3f%3A0x9cac4114b7c7b6c2!2sBanfora%20Waterfalls!5e0!3m2!1sen!2sbf!4v1691234567890!5m2!1sen!2sbf" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Cascades de Banfora</h3>
+                <p>Découvrez l'un des sites touristiques les plus importants du Burkina Faso, véritable joyau naturel de la région des Cascades.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Liens rapides</h3>
+                <a href="#about">À propos des cascades</a>
+                <a href="#gallery">Galerie photos</a>
+                <a href="#reservation">Réservation groupes</a>
+                <a href="#contact">Contact et localisation</a>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Informations pratiques</h3>
+                <p><i class="far fa-clock"></i> Ouvert tous les jours: 8h - 18h</p>
+                <p><i class="fas fa-ban"></i> Nuitée interdite sur le site</p>
+                <p><i class="fas fa-ticket-alt"></i> Tarifs: 500-1000 FCFA</p>
+                <p><i class="fas fa-map-marker-alt"></i> Karfiguéla, Banfora, Burkina Faso</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>Ce site est mis en ligne gracieusement par <a href="https://nticsolution.org"> <strong>NTIC SOLUTION</strong></a> pour contribuer au développement de la commune de Banfora et de toute la région des Cascades.</p>
+            <p>&copy; 2026 Cascades de Banfora - Tous droits réservés</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Animation pour la sélection du type de groupe
+        document.querySelectorAll('.group-type').forEach(item => {
+            item.addEventListener('click', event => {
+                // Retirer la classe active de tous les éléments
+                document.querySelectorAll('.group-type').forEach(el => {
+                    el.classList.remove('active');
+                });
+                
+                // Ajouter la classe active à l'élément cliqué
+                item.classList.add('active');
+                
+                // Mettre à jour la valeur du champ caché
+                document.getElementById('groupType').value = item.getAttribute('data-value');
+            });
+        });
+        
+        // Gestion de la soumission du formulaire
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Récupération des données du formulaire
+            const groupType = document.getElementById('groupType').value;
+            const groupName = document.getElementById('groupName').value;
+            const participants = document.getElementById('participants').value;
+            const visitDate = document.getElementById('visitDate').value;
+            const contactName = document.getElementById('contactName').value;
+            const contactEmail = document.getElementById('contactEmail').value;
+            const contactPhone = document.getElementById('contactPhone').value;
+            
+            // Types de groupe en français
+            const groupTypeNames = {
+                'school': 'Établissement scolaire',
+                'training': 'Centre de formation',
+                'friends': 'Groupe d\'amis',
+                'family': 'Famille'
+            };
+            
+            // Affichage d'une alerte de confirmation (à remplacer par un envoi réel en production)
+            alert(`Merci ${contactName} ! Votre demande de réservation pour le groupe "${groupName}" (${groupTypeNames[groupType]}) a été envoyée avec succès.\n\nNous vous contacterons à ${contactEmail} ou au ${contactPhone} pour confirmer votre visite prévue le ${visitDate} avec ${participants} participants.\n\nCette fonctionnalité est en démonstration. En production, les données seraient envoyées à un serveur.`);
+            
+            // Réinitialisation du formulaire
+            document.getElementById('bookingForm').reset();
+            document.querySelectorAll('.group-type').forEach(el => el.classList.remove('active'));
+            document.querySelector('.group-type[data-value="school"]').classList.add('active');
+            document.getElementById('groupType').value = 'school';
+        });
+        
+        // Définir la date minimum pour la réservation (demain)
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        const tomorrowFormatted = tomorrow.toISOString().split('T')[0];
+        document.getElementById('visitDate').min = tomorrowFormatted;
+        
+        // Animation au défilement pour les sections
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Appliquer l'animation aux sections
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
